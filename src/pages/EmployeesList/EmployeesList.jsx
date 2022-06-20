@@ -1,22 +1,23 @@
 import React from "react";
 import "./EmployeesList.css";
 import { Link } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 export default function EmployeesList() {
   return (
     <div className="container">
       <div className="title">
-        <h1>HRnet</h1>
+        <h1>Current employees</h1>
       </div>
-      <div className="content" style={{ height: 371, width: "100%" }}>
+      <div className="content">
         <DataGrid
           className="table"
           rows={rows}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
           checkboxSelection
+          components={{ Toolbar: GridToolbar }}
         />
       </div>
       <Link to="/">Home</Link>
@@ -100,13 +101,13 @@ const rows = [
 ];
 
 const columns = [
-  { field: "firstName", headerName: "First name", flex: 1 },
-  { field: "lastName", headerName: "Last name", flex: 1 },
-  { field: "startdate", headerName: "Start Date", flex: 1 },
-  { field: "department", headerName: "Department", flex: 1 },
-  { field: "birthdate", headerName: "Date of Birth", flex: 1 },
-  { field: "street", headerName: "Street", flex: 1 },
-  { field: "city", headerName: "City", flex: 1 },
-  { field: "state", headerName: "State", flex: 1 },
-  { field: "zipcode", headerName: "Zip Code", flex: 1 },
+  { field: "firstName", headerName: "First name", flex: 1, minWidth: 100 },
+  { field: "lastName", headerName: "Last name", flex: 1, minWidth: 100 },
+  { field: "startdate", headerName: "Start Date", flex: 1, minWidth: 100 },
+  { field: "department", headerName: "Department", flex: 1, minWidth: 100 },
+  { field: "birthdate", headerName: "Date of Birth", flex: 1, minWidth: 100 },
+  { field: "street", headerName: "Street", flex: 1, minWidth: 100 },
+  { field: "city", headerName: "City", flex: 1, minWidth: 100 },
+  { field: "state", headerName: "State", flex: 1, minWidth: 100 },
+  { field: "zipcode", headerName: "Zip Code", flex: 1, minWidth: 100 },
 ];
