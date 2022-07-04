@@ -14,6 +14,9 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import format from "date-fns/format";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmployee } from "../../redux/employees";
+import { useEffect } from "react";
 
 const MenuProps = {
   PaperProps: {
@@ -24,6 +27,10 @@ const MenuProps = {
 };
 
 export default function Index() {
+  // API variable and methodes
+  const data = useSelector((state) => state.employees);
+  const dispatch = useDispatch();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birth, setBirth] = useState(new Date("2030-08-18T21:11:54"));
@@ -50,6 +57,8 @@ export default function Index() {
   const submitForm = (e) => {
     e.preventDefault();
     let tableErrors = [];
+
+    // Check every input
     tableErrors = [
       !checkTextInput(firstName),
       !checkTextInput(lastName),
@@ -63,6 +72,7 @@ export default function Index() {
     ];
     setErrors(tableErrors);
 
+    // Check if there is an error anywhere in the form
     let ok = true;
     tableErrors.forEach((error) => {
       if (error) {
@@ -70,9 +80,25 @@ export default function Index() {
       }
     });
     if (ok) {
-      console.log("C'est bon");
+      dispatch(
+        addEmployee([
+          firstName,
+          lastName,
+          format(birth, "dd-MM-yyyy"),
+          format(start, "dd-MM-yyyy"),
+          street,
+          city,
+          state,
+          zip,
+          department,
+        ])
+      );
     }
   };
+
+  useEffect(() => {
+    console.log(data.table);
+  }, [data]);
 
   return (
     <div className="container">
@@ -120,10 +146,18 @@ export default function Index() {
             <legend>Address</legend>
 
             <label for="street">Street</label>
-            <input id="street" type="text" onChange={(e) => setStreet(e)} />
+            <input
+              id="street"
+              type="text"
+              onChange={(e) => setStreet(e.target.value)}
+            />
 
             <label for="city">City</label>
-            <input id="city" type="text" onChange={(e) => setCity(e)} />
+            <input
+              id="city"
+              type="text"
+              onChange={(e) => setCity(e.target.value)}
+            />
 
             <FormControl className="dropdown" fullWidth>
               <InputLabel id="state">State</InputLabel>
@@ -184,13 +218,13 @@ function checkTextInput(text) {
 }
 
 function checkBirthDate(birthdate) {
-  return /(?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19\d{2}|20[0-2][0-9]|2022)\b/.test(
+  return /(?:0[1-9]|[12][0-9]|3[01])[-/.](?:0[1-9]|1[012])[-/.](?:19\d{2}|20[0-2][0-9]|2022)\b/.test(
     birthdate
   );
 }
 
 function checkStart(startdate) {
-  return /(?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19\d{2}|20[0-9][0-9])\b/.test(
+  return /(?:0[1-9]|[12][0-9]|3[01])[-/.](?:0[1-9]|1[012])[-/.](?:19\d{2}|20[0-9][0-9])\b/.test(
     startdate
   );
 }
