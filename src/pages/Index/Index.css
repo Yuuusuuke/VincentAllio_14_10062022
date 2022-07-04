@@ -10,11 +10,15 @@
     width: 100%;
 }
 
-.dropdown{
+.dropdown, .datepicker{
     margin: 10px 0 !important;
 }
 
 .address{
     margin: 10px 0;
     padding: 0 10px 10px;
+    width: 100%;
+}
+.datepickers{
+    margin-top: 20px;
 }

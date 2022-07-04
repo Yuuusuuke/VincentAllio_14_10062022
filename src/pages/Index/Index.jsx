@@ -1,8 +1,19 @@
 import React from "react";
 import "./Index.css";
 import { Link } from "react-router-dom";
-import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  TextField,
+  Stack,
+} from "@mui/material";
 import { useState } from "react";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import format from "date-fns/format";
 
 const MenuProps = {
   PaperProps: {
@@ -13,21 +24,56 @@ const MenuProps = {
 };
 
 export default function Index() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birth, setBirth] = useState(new Date("2030-08-18T21:11:54"));
+  const [start, setStart] = useState(new Date("2030-08-18T21:11:54"));
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
   const [department, setDepartment] = useState("Sales");
 
-  const handleChange = (selector, item) => {
-    switch (selector) {
-      case "state":
-        setState(item);
-        break;
-      case "department":
-        setDepartment(item);
-        break;
-      default:
-        break;
+  /* Table to know where the error is | [0] is firstName ; [8] is department | order list above */
+  const [errors, setErrors] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    let tableErrors = [];
+    tableErrors = [
+      !checkTextInput(firstName),
+      !checkTextInput(lastName),
+      !checkBirthDate(format(birth, "dd-MM-yyyy")),
+      !checkStart(format(start, "dd-MM-yyyy")),
+      !checkTextInput(street),
+      !checkTextInput(city),
+      !checkTextInput(state),
+      !checkZip(zip),
+      !checkTextInput(department),
+    ];
+    setErrors(tableErrors);
+
+    let ok = true;
+    tableErrors.forEach((error) => {
+      if (error) {
+        ok = false;
+      }
+    });
+    if (ok) {
+      console.log("C'est bon");
     }
   };
+
   return (
     <div className="container">
       <div className="title">
@@ -36,27 +82,48 @@ export default function Index() {
       <div className="content">
         <Link to="/employees-list">View Current Employees</Link>
         <h2>Create Employee</h2>
-        <form action="#" id="create-employee">
+        <form action="#" id="create-employee" onSubmit={(e) => submitForm(e)}>
           <label for="first-name">First Name</label>
-          <input type="text" id="first-name" />
+          <input
+            type="text"
+            id="first-name"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
 
           <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" />
+          <input
+            type="text"
+            id="last-name"
+            onChange={(e) => setLastName(e.target.value)}
+          />
 
-          <label for="date-of-birth">Date of Birth</label>
-          <input id="date-of-birth" type="text" />
-
-          <label for="start-date">Start Date</label>
-          <input id="start-date" type="text" />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3} className="datepickers">
+              <DesktopDatePicker
+                label="Date of Birth"
+                inputFormat="dd/MM/yyyy"
+                value={birth}
+                onChange={(e) => setBirth(e)}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <DesktopDatePicker
+                label="Start Date"
+                inputFormat="dd/MM/yyyy"
+                value={start}
+                onChange={(e) => setStart(e)}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack>
+          </LocalizationProvider>
 
           <fieldset class="address">
             <legend>Address</legend>
 
             <label for="street">Street</label>
-            <input id="street" type="text" />
+            <input id="street" type="text" onChange={(e) => setStreet(e)} />
 
             <label for="city">City</label>
-            <input id="city" type="text" />
+            <input id="city" type="text" onChange={(e) => setCity(e)} />
 
             <FormControl className="dropdown" fullWidth>
               <InputLabel id="state">State</InputLabel>
@@ -65,7 +132,7 @@ export default function Index() {
                 labelId="state"
                 value={state}
                 label="State"
-                onChange={(e) => handleChange("state", e.target.value)}
+                onChange={(e) => setState(e.target.value)}
                 MenuProps={MenuProps}
               >
                 {states.map((item, key) => {
@@ -79,7 +146,11 @@ export default function Index() {
             </FormControl>
 
             <label for="zip-code">Zip Code</label>
-            <input id="zip-code" type="number" />
+            <input
+              id="zip-code"
+              type="number"
+              onChange={(e) => setZip(e.target.value)}
+            />
           </fieldset>
 
           <FormControl className="dropdown" fullWidth>
@@ -89,7 +160,7 @@ export default function Index() {
               labelId="department"
               value={department}
               label="Department"
-              onChange={(e) => handleChange("department", e.target.value)}
+              onChange={(e) => setDepartment(e.target.value)}
             >
               <MenuItem value={"Sales"}>Sales</MenuItem>
               <MenuItem value={"Marketing"}>Marketing</MenuItem>
@@ -98,15 +169,34 @@ export default function Index() {
               <MenuItem value={"Legal"}>Legal</MenuItem>
             </Select>
           </FormControl>
+          <input type="submit" value="Save" />
         </form>
-
-        <button onclick="saveEmployee()">Save</button>
       </div>
       <div id="confirmation" class="modal">
         Employee Created!
       </div>
     </div>
   );
+}
+
+function checkTextInput(text) {
+  return /[a-zA-Z]{3,}/.test(text) && text !== "";
+}
+
+function checkBirthDate(birthdate) {
+  return /(?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19\d{2}|20[0-2][0-9]|2022)\b/.test(
+    birthdate
+  );
+}
+
+function checkStart(startdate) {
+  return /(?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19\d{2}|20[0-9][0-9])\b/.test(
+    startdate
+  );
+}
+
+function checkZip(code) {
+  return /\d{3,}/.test(code) && code !== "";
 }
 
 const states = [
