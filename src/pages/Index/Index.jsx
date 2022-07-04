@@ -84,8 +84,8 @@ export default function Index() {
         addEmployee([
           firstName,
           lastName,
-          format(birth, "dd-MM-yyyy"),
-          format(start, "dd-MM-yyyy"),
+          format(birth, "dd/MM/yyyy"),
+          format(start, "dd/MM/yyyy"),
           street,
           city,
           state,

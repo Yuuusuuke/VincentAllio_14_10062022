@@ -8,7 +8,9 @@ export const employeesSlice = createSlice({
     },
     reducers:{
         addEmployee: (state, action) => {
+            state.size++;
             state.table.push({
+                'id': state.size,
                 "firstName": action.payload[0],
                 "lastName" : action.payload[1],
                 "birthdate": action.payload[2],
@@ -19,7 +21,6 @@ export const employeesSlice = createSlice({
                 "zipcode": action.payload[7],
                 "department": action.payload[8]
          });
-         state.size++;
         }
     }
 })
