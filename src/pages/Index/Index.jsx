@@ -14,9 +14,8 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import format from "date-fns/format";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addEmployee } from "../../redux/employees";
-import { useEffect } from "react";
 
 const MenuProps = {
   PaperProps: {
@@ -28,7 +27,6 @@ const MenuProps = {
 
 export default function Index() {
   // API variable and methodes
-  const data = useSelector((state) => state.employees);
   const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState("");
@@ -96,10 +94,6 @@ export default function Index() {
     }
   };
 
-  useEffect(() => {
-    console.log(data.table);
-  }, [data]);
-
   return (
     <div className="container">
       <div className="title">
@@ -115,6 +109,7 @@ export default function Index() {
             id="first-name"
             onChange={(e) => setFirstName(e.target.value)}
           />
+          {errors[0] && <p className="error">Invalid name</p>}
 
           <label for="last-name">Last Name</label>
           <input
@@ -122,6 +117,7 @@ export default function Index() {
             id="last-name"
             onChange={(e) => setLastName(e.target.value)}
           />
+          {errors[1] && <p className="error">Invalid name</p>}
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3} className="datepickers">
@@ -132,6 +128,7 @@ export default function Index() {
                 onChange={(e) => setBirth(e)}
                 renderInput={(params) => <TextField {...params} />}
               />
+              {errors[2] && <p className="error">Invalid date</p>}
               <DesktopDatePicker
                 label="Start Date"
                 inputFormat="dd/MM/yyyy"
@@ -139,6 +136,7 @@ export default function Index() {
                 onChange={(e) => setStart(e)}
                 renderInput={(params) => <TextField {...params} />}
               />
+              {errors[3] && <p className="error">Invalid date</p>}
             </Stack>
           </LocalizationProvider>
 
@@ -151,6 +149,7 @@ export default function Index() {
               type="text"
               onChange={(e) => setStreet(e.target.value)}
             />
+            {errors[4] && <p className="error">Invalid address</p>}
 
             <label for="city">City</label>
             <input
@@ -158,6 +157,7 @@ export default function Index() {
               type="text"
               onChange={(e) => setCity(e.target.value)}
             />
+            {errors[5] && <p className="error">Invalid city</p>}
 
             <FormControl className="dropdown" fullWidth>
               <InputLabel id="state">State</InputLabel>
@@ -177,6 +177,7 @@ export default function Index() {
                   );
                 })}
               </Select>
+              {errors[6] && <p className="error">Invalid state</p>}
             </FormControl>
 
             <label for="zip-code">Zip Code</label>
@@ -185,6 +186,7 @@ export default function Index() {
               type="number"
               onChange={(e) => setZip(e.target.value)}
             />
+            {errors[7] && <p className="error">Invalid code</p>}
           </fieldset>
 
           <FormControl className="dropdown" fullWidth>
@@ -205,9 +207,6 @@ export default function Index() {
           </FormControl>
           <input type="submit" value="Save" />
         </form>
-      </div>
-      <div id="confirmation" class="modal">
-        Employee Created!
       </div>
     </div>
   );

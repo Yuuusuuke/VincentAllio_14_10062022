@@ -22,3 +22,10 @@
 .datepickers{
     margin-top: 20px;
 }
+
+.error{
+    color: red;
+    font-size: 12px;
+    margin: 0 !important;
+    padding: 0;
+}
