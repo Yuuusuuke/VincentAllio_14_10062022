@@ -16,6 +16,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import format from "date-fns/format";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../../redux/employees";
+import { Modale } from "yuusuke_modale";
 
 const MenuProps = {
   PaperProps: {
@@ -38,6 +39,8 @@ export default function Index() {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [department, setDepartment] = useState("Sales");
+
+  const [openModale, setOpenModale] = useState(false);
 
   /* Table to know where the error is | [0] is firstName ; [8] is department | order list above */
   const [errors, setErrors] = useState([
@@ -91,6 +94,7 @@ export default function Index() {
           department,
         ])
       );
+      setOpenModale(true);
     }
   };
 
@@ -103,7 +107,7 @@ export default function Index() {
         <Link to="/employees-list">View Current Employees</Link>
         <h2>Create Employee</h2>
         <form action="#" id="create-employee" onSubmit={(e) => submitForm(e)}>
-          <label for="first-name">First Name</label>
+          <label htmlFor="first-name">First Name</label>
           <input
             type="text"
             id="first-name"
@@ -111,7 +115,7 @@ export default function Index() {
           />
           {errors[0] && <p className="error">Invalid name</p>}
 
-          <label for="last-name">Last Name</label>
+          <label htmlFor="last-name">Last Name</label>
           <input
             type="text"
             id="last-name"
@@ -140,10 +144,10 @@ export default function Index() {
             </Stack>
           </LocalizationProvider>
 
-          <fieldset class="address">
+          <fieldset className="address">
             <legend>Address</legend>
 
-            <label for="street">Street</label>
+            <label htmlFor="street">Street</label>
             <input
               id="street"
               type="text"
@@ -151,7 +155,7 @@ export default function Index() {
             />
             {errors[4] && <p className="error">Invalid address</p>}
 
-            <label for="city">City</label>
+            <label htmlFor="city">City</label>
             <input
               id="city"
               type="text"
@@ -180,7 +184,7 @@ export default function Index() {
               {errors[6] && <p className="error">Invalid state</p>}
             </FormControl>
 
-            <label for="zip-code">Zip Code</label>
+            <label htmlFor="zip-code">Zip Code</label>
             <input
               id="zip-code"
               type="number"
@@ -206,6 +210,9 @@ export default function Index() {
             </Select>
           </FormControl>
           <input type="submit" value="Save" />
+          {openModale && (
+            <Modale setFunction={setOpenModale} text="Employee created !" />
+          )}
         </form>
       </div>
     </div>
