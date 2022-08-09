@@ -26,7 +26,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Yuuusuuke/VincentAllio_13_12052022">
-    <img src="./src/ressources/logo.jpg" alt="Logo" width="100" height="100">
+    <img src="./src/ressources/logo.jpg" alt="Logo" width="150" height="150">
   </a>
 
 <h3 align="center">Wealth Health Frontend website</h3>
