@@ -25,7 +25,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Yuuusuuke/VincentAllio_13_12052022">
+  <a href="https://github.com/Yuuusuuke/VincentAllio_14_10062022">
     <img src="./src/ressources/logo.jpg" alt="Logo" width="150" height="150">
   </a>
 
@@ -34,14 +34,14 @@
   <p align="center">
     Frontend sourcecode for Wealth Health website. This is the 14th project on Frontend course on Openclassroom
     <br />
-    <a href="https://github.com/Yuuusuuke/VincentAllio_13_12052022"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Yuuusuuke/VincentAllio_14_10062022"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Yuuusuuke/VincentAllio_13_12052022">View Demo</a>
+    <a href="https://github.com/Yuuusuuke/VincentAllio_14_10062022">View Demo</a>
     ·
-    <a href="https://github.com/Yuuusuuke/VincentAllio_13_12052022/issues">Report Bug</a>
+    <a href="https://github.com/Yuuusuuke/VincentAllio_14_10062022/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Yuuusuuke/VincentAllio_13_12052022/issues">Request Feature</a>
+    <a href="https://github.com/Yuuusuuke/VincentAllio_14_10062022/issues">Request Feature</a>
   </p>
 </div>
 
@@ -103,7 +103,7 @@ This project uses :
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Yuuusuuke/VincentAllio_13_12052022.git
+   git clone https://github.com/Yuuusuuke/VincentAllio_14_10062022.git
    ```
 2. Install NPM packages
    ```sh
@@ -132,13 +132,13 @@ Don't forget to give the project a star! Thanks again!
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/Yuuusuuke/VincentAllio_13_12052022.svg?style=for-the-badge
-[contributors-url]: https://github.com/Yuuusuuke/VincentAllio_13_12052022/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Yuuusuuke/VincentAllio_13_12052022.svg?style=for-the-badge
-[forks-url]: https://github.com/Yuuusuuke/VincentAllio_13_12052022/network/members
-[stars-shield]: https://img.shields.io/github/stars/Yuuusuuke/VincentAllio_13_12052022.svg?style=for-the-badge
-[stars-url]: https://github.com/Yuuusuuke/VincentAllio_13_12052022/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Yuuusuuke/VincentAllio_13_12052022.svg?style=for-the-badge
-[issues-url]: https://github.com/Yuuusuuke/VincentAllio_13_12052022/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Yuuusuuke/VincentAllio_14_10062022.svg?style=for-the-badge
+[contributors-url]: https://github.com/Yuuusuuke/VincentAllio_14_10062022/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Yuuusuuke/VincentAllio_14_10062022.svg?style=for-the-badge
+[forks-url]: https://github.com/Yuuusuuke/VincentAllio_14_10062022/network/members
+[stars-shield]: https://img.shields.io/github/stars/Yuuusuuke/VincentAllio_14_10062022.svg?style=for-the-badge
+[stars-url]: https://github.com/Yuuusuuke/VincentAllio_14_10062022/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Yuuusuuke/VincentAllio_14_10062022.svg?style=for-the-badge
+[issues-url]: https://github.com/Yuuusuuke/VincentAllio_14_10062022/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/vincent-allio-3036061b2
